@@ -1,68 +1,357 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+  box-sizing: border-box;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+@media screen and (width <= 376px) {
+  .pokecards {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 15px;
+    justify-content: center;
+    font-family: "Ubuntu", sans-serif;
+    padding: 15px;
+    max-width: 200px;
+  }
+
+  .pokecards__card {
+    background-color: white;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    border: 1px solid #d1cdca;
+    max-width: 200px;
+    min-height: 200px;
+    position: relative;
+  }
+
+  .pokecards__filter {
+    grid-row-end: 1;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+  }
 }
-a:hover {
-  color: #535bf2;
+
+@media screen and (376px <= width <= 600px) {
+  .pokecards {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    justify-content: center;
+    font-family: "Ubuntu", sans-serif;
+    padding: 10px;
+    max-width: 300px;
+  }
+
+  .pokecards__card {
+    background-color: white;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    border: 1px solid #d1cdca;
+    max-width: 200px;
+    min-height: 200px;
+    position: relative;
+  }
+
+  .pokecards__filter {
+    grid-row-end: 1;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+  }
+}
+
+@media screen and (600px <= width < 1440px) {
+  .pokecards {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    justify-content: center;
+    font-family: "Ubuntu", sans-serif;
+    padding: 10px;
+    --maxw: 500px;
+    max-width: var(--maxw);
+  }
+
+  .pokecards__card {
+    background-color: white;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    border: 1px solid #d1cdca;
+    max-width: var(--maxw);
+    min-height: 200px;
+    position: relative;
+  }
+
+  .pokecards__filter {
+    grid-row-end: 1;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+  }
+}
+
+@media (1440px <= width < 2560px) {
+  .pokecards {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+    justify-content: center;
+    font-family: "Ubuntu", sans-serif;
+    padding: 10px;
+    --maxw: 1000px;
+    max-width: var(--maxw);
+  }
+
+  .pokecards__card {
+    background-color: white;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    border: 1px solid #d1cdca;
+    max-width: 200px;
+    min-height: 200px;
+    position: relative;
+  }
+
+  .pokecards__filter {
+    grid-row-end: 1;
+    grid-column-start: 1;
+    grid-column-end: 7;
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+  }
+}
+
+@media screen and (width >= 2560px) {
+  .pokecards {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 15px;
+    justify-content: center;
+    font-family: "Ubuntu", sans-serif;
+    padding: 140px;
+    --maxw: 1400px;
+    max-width: var(--maxw);
+    scale: 1.5;
+  }
+
+  .pokecards__card {
+    background-color: white;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    border: 1px solid #d1cdca;
+    max-width: 200px;
+    min-height: 200px;
+    scale: 1;
+    position: relative;
+  }
+
+  .pokecards__filter {
+    grid-row-end: 1;
+    grid-column-start: 1;
+    grid-column-end: 11;
+    text-align: center;
+    background-color: white;
+    padding: 10px;
+  }
+}
+
+.pokecards {
+  position: relative;
+}
+
+input::placeholder {
+  text-align: center;
+  color: #d1cdca;
+}
+
+.pokecards__filter {
+  position: sticky;
+  top: 10px;
+  z-index: 1;
+}
+
+.pokecards__filter input {
+  position: sticky;
+  border: none;
+  width: 100%;
+  text-align: center;
+}
+
+.pokecards__card:hover {
+  animation: escala 1s;
+  animation-fill-mode: forwards;
+}
+
+.pokecards__card:focus {
+  animation: escala 1s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes escala {
+  from {
+    scale: 1;
+  }
+  to {
+    scale: 1.1;
+    z-index: 2;
+  }
+}
+
+.pokecards__background {
+  position: relative;
+  background-color: #dfdfdf;
+  text-align: center;
+  transition: background-color 2s ease-in-out;
+}
+
+.pokecards__background:hover {
+  background-color: #9e9e9e;
+}
+
+.pokecards__background > img {
+  align-items: center;
+}
+
+.pokecards__background > img:hover {
+  animation: escala 1s;
+  animation-fill-mode: forwards;
+}
+
+.pokecards__id {
+  position: absolute;
+  margin-top: -22px;
+  background-color: #d1cdca;
+  padding: 5px;
+  font-size: 10px;
+  font-weight: bold;
+  color: #856a4e;
+}
+
+.pokecards__name {
+  padding-left: 10px;
+  margin-bottom: 0;
+  text-transform: capitalize;
+}
+
+.pokecards__types {
+  padding-left: 10px;
+  margin-top: 0;
+  list-style: none;
+}
+
+.pokecards__types li {
+  display: inline;
+  margin-top: 0;
+  font-size: 8px;
+  border: 1px solid #856a4e;
+  border-radius: 5px;
+  padding: 3px;
+  color: #856a4e;
+  margin-left: 2px;
+}
+
+.pokecards__evolution {
+  color: #856a4e;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
+.pokecards__evolution h6 {
+  font-weight: lighter;
+  display: inline;
+  margin-left: 10px;
+}
+
+.pokecards__evolution h4 {
+  margin-top: 0;
+  margin-left: 10px;
+  margin-bottom: 0;
+  display: inline-block;
+  text-transform: capitalize;
+}
+
+.pokecards__evolution::before {
+  position: absolute;
+  content: "|";
+  font-size: 33px;
+}
+
+.pokecards__evolution--empty {
+  display: none;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  position: relative;
+  background-color: #ffe62c;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.ear__left {
+  top: -60px;
+  left: -60px;
+  transform: rotate(45deg);
+  position: fixed;
+  background-color: black;
+  width: 100px;
+  height: 100px;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.ear__right {
+  float: right;
+  position: fixed;
+  background-color: black;
+  width: 100px;
+  height: 100px;
+  transform: rotate(45deg);
+  top: -60px;
+  right: -60px;
+}
+
+.cheek__left {
+  background-color: #ea2a2a;
+  border-radius: 50%;
+  position: fixed;
+  bottom: -50px;
+  left: -50px;
+  width: 100px;
+  height: 100px;
+  z-index: -1;
+}
+
+.cheek_right {
+  background-color: #ea2a2a;
+  border-radius: 50%;
+  position: fixed;
+  bottom: -50px;
+  right: -50px;
+  width: 100px;
+  height: 100px;
+  z-index: -1;
+}
+
+.pokecards__card {
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: all 0.3s ease-out;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.pokecards__cardFilter {
+  visibility: hidden;
+  opacity: 0;
+  order: 1;
+  display: none;
+}
+
+.pokecards__cardDisplayNone {
+  display: none;
+}
+
+.pokecards__evolution div {
+  text-transform: capitalize;
 }
